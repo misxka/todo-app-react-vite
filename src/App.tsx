@@ -1,6 +1,7 @@
 import { Center, Flex } from '@chakra-ui/react';
-import styles from './App.module.scss';
 import { ToDoContainer } from './components/ToDoContainer/ToDoContainer';
+
+import styles from './App.module.scss';
 
 function App() {
   return (

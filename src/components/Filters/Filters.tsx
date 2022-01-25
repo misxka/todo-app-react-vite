@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, filter } from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import styles from './Filters.module.scss';
@@ -37,7 +37,7 @@ function Filters() {
   };
 
   return (
-    <ButtonGroup spacing='6' size='md' colorScheme='blue'>
+    <ButtonGroup className={styles.group} spacing='6' size='md' colorScheme='blue'>
       {filterButtons.map(({ name, target }) => (
         <Button key={name} onClick={e => clickHandler(e, target)} variant={selected === target ? 'solid' : 'ghost'}>
           {name}
