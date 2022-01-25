@@ -1,4 +1,4 @@
-import { StackDivider, VStack } from '@chakra-ui/react';
+import { Editable, EditableInput, EditablePreview, StackDivider, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -47,6 +47,17 @@ function ToDoContainer() {
     setTodos(updatedTodos);
   };
 
+  const updateTodoValue = (id: string, value: string) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        todo.value = value;
+      }
+      return todo;
+    });
+
+    setTodos(updatedTodos);
+  };
+
   const deleteTodo = (id: string) => {
     const updatedTodos = todos.filter(todo => todo.id !== id);
 
@@ -56,7 +67,11 @@ function ToDoContainer() {
   return (
     <VStack borderColor='blue.500' className={styles.container} divider={<StackDivider borderColor='blue.500' />} spacing={6} align='stretch'>
       <Filters setFilterOption={setFilterOption} />
-      <ToDoList todos={todos} updateItem={updateTodo} deleteItem={deleteTodo} filterOption={filterOption} />
+      <ToDoList todos={todos} updateItem={updateTodo} deleteItem={deleteTodo} filterOption={filterOption} updateItemValue={updateTodoValue} />
+      <Editable defaultValue='Take some chakra'>
+        <EditablePreview />
+        <EditableInput />
+      </Editable>
       <AddToDo addTodo={addTodo} />
     </VStack>
   );

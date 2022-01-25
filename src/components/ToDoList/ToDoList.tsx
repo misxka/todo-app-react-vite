@@ -7,12 +7,13 @@ import { ToDoItem } from '../ToDoItem/ToDoItem';
 type Props = {
   todos: ToDoItemModel[];
   updateItem: (id: string, prop: UpdatableProps) => void;
+  updateItemValue: (id: string, value: string) => void;
   deleteItem: (id: string) => void;
   filterOption: FilterOption;
 };
 
 function ToDoList(props: Props) {
-  const { todos, updateItem, deleteItem, filterOption } = props;
+  const { todos, updateItem, deleteItem, updateItemValue, filterOption } = props;
 
   const filterTodos = (filterOption: FilterOption): ToDoItemModel[] => {
     if (filterOption === FilterOption.Active) return todos.filter(todo => todo.completed === false);
@@ -23,7 +24,7 @@ function ToDoList(props: Props) {
   return (
     <List>
       {filterTodos(filterOption).map(todo => (
-        <ToDoItem key={todo.id} item={todo} updateItem={updateItem} deleteItem={deleteItem} />
+        <ToDoItem key={todo.id} item={todo} updateItem={updateItem} deleteItem={deleteItem} updateItemValue={updateItemValue} />
       ))}
     </List>
   );
