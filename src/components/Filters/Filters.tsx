@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import styles from './Filters.module.scss';
 
-enum Selected {
+export enum FilterOption {
   All,
   Active,
   Completed
@@ -11,29 +11,36 @@ enum Selected {
 
 type FilterButton = {
   name: string;
-  target: Selected;
+  target: FilterOption;
 };
 
 const filterButtons: FilterButton[] = [
   {
     name: 'All',
-    target: Selected.All
+    target: FilterOption.All
   },
   {
     name: 'Active',
-    target: Selected.Active
+    target: FilterOption.Active
   },
   {
     name: 'Completed',
-    target: Selected.Completed
+    target: FilterOption.Completed
   }
 ];
 
-function Filters() {
-  const [selected, setSelected] = useState(Selected.All);
+type Props = {
+  setFilterOption: (filterOption: FilterOption) => void;
+};
 
-  const clickHandler = (e: React.MouseEvent, selectOption: Selected) => {
+function Filters(props: Props) {
+  const { setFilterOption } = props;
+
+  const [selected, setSelected] = useState(FilterOption.All);
+
+  const clickHandler = (e: React.MouseEvent, selectOption: FilterOption) => {
     setSelected(selectOption);
+    setFilterOption(selectOption);
   };
 
   return (

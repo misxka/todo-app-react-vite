@@ -4,13 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 import ToDoItemModel, { UpdatableProps } from '../../models/ToDoItem.model';
 import { AddToDo } from '../AddToDo/AddToDo';
-import { Filters } from '../Filters/Filters';
+import { FilterOption, Filters } from '../Filters/Filters';
 import { ToDoList } from '../ToDoList/ToDoList';
 
 import styles from './ToDoContainer.module.scss';
 
 function ToDoContainer() {
   const [todos, setTodos] = useState<ToDoItemModel[]>([]);
+  const [filterOption, setFilterOption] = useState<FilterOption>(FilterOption.All);
 
   useEffect(() => {
     const todosJson = localStorage.getItem('todos');
@@ -54,8 +55,8 @@ function ToDoContainer() {
 
   return (
     <VStack borderColor='blue.500' className={styles.container} divider={<StackDivider borderColor='blue.500' />} spacing={6} align='stretch'>
-      <Filters />
-      <ToDoList todos={todos} updateItem={updateTodo} deleteItem={deleteTodo} />
+      <Filters setFilterOption={setFilterOption} />
+      <ToDoList todos={todos} updateItem={updateTodo} deleteItem={deleteTodo} filterOption={filterOption} />
       <AddToDo addTodo={addTodo} />
     </VStack>
   );
