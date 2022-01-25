@@ -2,7 +2,7 @@ import { StackDivider, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import ToDoItemModel from '../../models/ToDoItem.model';
+import ToDoItemModel, { UpdatableProps } from '../../models/ToDoItem.model';
 import { AddToDo } from '../AddToDo/AddToDo';
 import { Filters } from '../Filters/Filters';
 import { ToDoList } from '../ToDoList/ToDoList';
@@ -35,10 +35,27 @@ function ToDoContainer() {
     setTodos([...todos, todo]);
   };
 
+  const updateTodo = (id: string, prop: UpdatableProps) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        todo[prop] = !todo[prop];
+      }
+      return todo;
+    });
+
+    setTodos(updatedTodos);
+  };
+
+  const deleteTodo = (id: string) => {
+    const updatedTodos = todos.filter(todo => todo.id !== id);
+
+    setTodos(updatedTodos);
+  };
+
   return (
-    <VStack borderColor='blue.500' className={styles.container} divider={<StackDivider borderColor='blue.500' />} align='stretch'>
+    <VStack borderColor='blue.500' className={styles.container} divider={<StackDivider borderColor='blue.500' />} spacing={6} align='stretch'>
       <Filters />
-      <ToDoList todos={todos} />
+      <ToDoList todos={todos} updateItem={updateTodo} deleteItem={deleteTodo} />
       <AddToDo addTodo={addTodo} />
     </VStack>
   );

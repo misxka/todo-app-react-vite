@@ -5,4 +5,8 @@ type ToDoItem = {
   important: boolean;
 };
 
+type UpdatableProps = 'important' | 'completed';
+
+export type { UpdatableProps };
+
 export default ToDoItem;

@@ -18,7 +18,16 @@ function AddToDo(props: Props) {
     <Flex>
       <Input maxWidth={600} placeholder='Add To-Do' value={inputData} onChange={handleInputChange} />
       <Spacer />
-      <Button width={100} size='md' colorScheme='green' onClick={() => addTodo(inputData)}>
+      <Button
+        isDisabled={inputData ? false : true}
+        width={100}
+        size='md'
+        colorScheme='green'
+        onClick={() => {
+          addTodo(inputData);
+          setInputData('');
+        }}
+      >
         Add
       </Button>
     </Flex>
