@@ -1,0 +1,16 @@
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.editable {
+  border-bottom: 1px solid;
+}
+
+.completed {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: red;
+}

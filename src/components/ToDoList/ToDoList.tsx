@@ -13,9 +13,7 @@ function ToDoList(props: Props) {
   return (
     <List>
       {todos.map(todo => (
-        <ListItem key={todo.id}>
-          <ToDoItem item={todo} />
-        </ListItem>
+        <ToDoItem key={todo.id} item={todo} />
       ))}
     </List>
   );
